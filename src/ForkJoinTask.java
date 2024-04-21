@@ -17,7 +17,11 @@ public class ForkJoinTask extends RecursiveTask<Integer> {
                 }
                 return sum;
             }else{
-
+                int mid = (start + end) / 2;
+                ForkJoinTask left = new ForkJoinTask(start, mid);
+                ForkJoinTask right = new ForkJoinTask(mid , end);
+                 left.fork() ;
+                return left.join() + right.compute();
             }
     }
 }
